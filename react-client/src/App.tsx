@@ -8,6 +8,7 @@ import CreateCarPage from './components/pages/addCar'
 import CarsPage from './components/pages/cars';
 import AddRentPage from './components/pages/RentCar';
 import RentsPage from './components/pages/rents';
+import LandingPage from './components/pages/HomePage';
 
 
 console.log("Snir")
@@ -42,6 +43,11 @@ const routes: Array<IRoute> = [
         component: <RentsPage /> ,
         key: "Rents",
         label: "Rents"
+    },
+    {
+            path: "/Home",
+        component: <LandingPage /> ,
+        key: "Home",
     }
     
 ]
