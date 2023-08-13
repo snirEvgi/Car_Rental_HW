@@ -3,6 +3,7 @@ import express, { Request, Response, NextFunction } from "express"
 import { getAllRentedCars } from "./handlers/getAllRentedCars";
 import { checkCarExists } from "./handlers/checkCarExists";
 import { createNewRent } from "./handlers/createNewRent";
+import { rentalValidate } from "./handlers/rentalValidation";
 const rentRouter = express.Router();
 
 rentRouter.get("/", getRentedCars)
@@ -26,7 +27,10 @@ async function getRentedCars(req: Request, res: Response, next: NextFunction) {
   try {
     const {  carId, from, to, price, pricePerDay } = req.body;
     const carExists = await checkCarExists(carId);
-
+    const rentalValidator = await rentalValidate(carId, from, to);
+    if (rentalValidator) {
+      throw new Error("error");
+    }
     if (!carExists) {
       return res.status(400).json({ error: "Car do not exist." });
     }
@@ -37,8 +41,5 @@ async function getRentedCars(req: Request, res: Response, next: NextFunction) {
     return next(error);
   }
 };
-
-
-
 
 export { rentRouter };

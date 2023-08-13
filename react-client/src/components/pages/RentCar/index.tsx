@@ -32,8 +32,6 @@ const AddRentPage = () => {
       // }
 
       const calculatedPrice = daysDifference * Number(pricePerDay);
-      console.log("daysDifference", daysDifference);
-      console.log("calculatedPrice", calculatedPrice);
       const response = await axios.post(`http://localhost:4100/rentals/rent`, {
         carId,
         from,
@@ -41,7 +39,7 @@ const AddRentPage = () => {
         price: calculatedPrice,
         pricePerDay: Number(pricePerDay),
       });
-      console.log(response);
+console.log(response.data);
 
       showToast('success', 'Car Rented', 'Car has been successfully Rented.')
       setTimeout(() => { navi() }, 1000)

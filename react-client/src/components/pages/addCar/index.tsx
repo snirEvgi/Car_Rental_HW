@@ -53,7 +53,7 @@ const CreateCarPage = () => {
       console.log(error);
     }
   };
-  const showToast = (severity:any, summary:string, detail:string) => {
+  function showToast(severity:any, summary:string, detail:string)  {
     if (toastRef.current) {
       toastRef.current?.show({ severity, summary, detail });
     }
