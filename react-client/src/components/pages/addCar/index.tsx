@@ -1,7 +1,8 @@
-import  { useState } from 'react';
+import  { useState,useRef } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import axios from 'axios'; 
+import { Toast } from 'primereact/toast';
 import { Header } from '../../ui-components/header';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ const CreateCarPage = () => {
   const [engine, setEngine] = useState('');
   const [company, setCompany] = useState('');
   const [image, setImage] = useState('');
+  const toastRef = useRef<Toast>(null)
   const [validationErrors, setValidationErrors] = useState({
     car: '',
     lp: '',
@@ -44,9 +46,16 @@ const CreateCarPage = () => {
       });
       
       console.log(response.data);
-      navi()
+      showToast('success', 'Car Created', 'Car has been successfully created.')
+      setTimeout(()=>{navi()},1000)
     } catch (error) {
+      showToast('error', 'Error', 'An error occurred while creating the car.');
       console.log(error);
+    }
+  };
+  const showToast = (severity:any, summary:string, detail:string) => {
+    if (toastRef.current) {
+      toastRef.current?.show({ severity, summary, detail });
     }
   };
  const navigate = useNavigate();
@@ -55,6 +64,7 @@ const CreateCarPage = () => {
     }
   return (
     <div>
+      <Toast ref={toastRef} />
       <Header text="Add New Car" />
       <div className="p-fluid">
         <div className="p-field">

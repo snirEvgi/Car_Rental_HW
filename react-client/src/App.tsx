@@ -3,7 +3,6 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom"
 import { Button } from 'primereact/button'
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
-// import UpdateGameScores from './components/pages/updateScore'
 import CreateCarPage from './components/pages/addCar'
 import CarsPage from './components/pages/cars';
 import AddRentPage from './components/pages/RentCar';
